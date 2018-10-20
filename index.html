@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <title>avava angular prototype</title>
+        <meta name="viewport" content="width=620, user-scalable=no">
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link href='./dist/angular-carousel.css' rel='stylesheet' type='text/css'>
+        
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href='./css/custom.css' rel='stylesheet' type='text/css'>
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+        
+    </head>
+    <body ng-app="DemoApp" ng-controller="DemoCtrl">
+        <div class="row">
+            
+        <div class="visible-md visible-lg col-md-4">
+            <a href="http://avava.co"><img id="brobot-logo" src="https://d21oh8fj97neu1.cloudfront.net/9chw0or1/view.png" alt="Avava Logo & Wordmark"/></a>
+        </div><!-- col-md-4 -->
+        
+         
+        <div class="col-centered col-xs-8 col-md-4" id="builder">
+            <ul rn-carousel rn-carousel-buffered rn-carousel-control class="my-slider ng-cloak">
+                <li class="character" id="head" ng-repeat="head in heads|limitTo:21" ng-style="{'background-image': 'url(' + head.img + ')'}" >
+                </li>
+                
+            </ul>
+           
+
+            <ul rn-carousel rn-carousel-buffered  rn-carousel-control class="my-slider ng-cloak">
+                <li class="character" id="torso" ng-repeat="torso in torsos|limitTo:20" ng-style="{'background-image': 'url(' + torso.img + ')'}">
+                    
+                </li>
+            </ul>
+
+            <ul rn-carousel rn-carousel-buffered rn-carousel-control class="my-slider ng-cloak">
+                <li class="character" id="leg" ng-repeat="leg in legs|limitTo:20" ng-style="{'background-image': 'url(' + leg.img + ')'}">
+                   
+                </li>
+            </ul>
+            <div id ="grass"></div>
+        </div><!-- col-md-4 -->
+        
+        
+        <div class="col-xs-10 col-md-4 col-centered" id "survey">
+            <button type="button" class="btn btn-warning btn-lg" 
+                    id="done-button" onClick="finishedPlaying()">Done Playing!</button>
+            <form role="form" id = "survey">
+                <div class="form-group" id="email-group"> 
+                    <label for="email" class="control-label" >Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <label for="child-age" class="control-label">Child's Age:</label>
+                    <input id ="child-age" type="number" class="form-control" placeholder="Age">
+                </div>
+                <label for="child-liked" class="control-label">Tell us what the child enjoyed while building their character:</label>
+                <textarea class="form-control" id="child-liked" name="child-liked" rows="3" 
+                    placeholder="What they enjoyed"></textarea>
+                <label for="what-worked" class="control-label">Tell us what worked and didn't work well for the character builder :</label>
+                <textarea class="form-control" id="what-worked" name="what-worked" rows="3" 
+                    placeholder="What worked?"></textarea>
+                <label for="whats-next" class="control-label">Tell us what you expect to do with your character next:</label>
+                <textarea class="form-control" id="whats-next" name="whats-next" rows="3" 
+                    placeholder="Also add anything you would like to see in our product as a parent, suggestions, or requests. Get creative! :)"></textarea>
+                <button type="button" class="btn btn-primary" onClick="submitSurvey()">Submit</button>
+            </form>
+            
+            <script>$("#survey").hide()</script>
+
+        </div><!-- col-md-4 -->
+        
+    </div> <!-- row -->
+       
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js"></script>
+    <script src="./dist/angular-carousel.js"></script>
+    <script src="./js/custom.js"></script>
+
+    <script>
+        
+        angular.module('DemoApp', [
+            'angular-carousel'
+        ])
+        .controller('DemoCtrl', function($scope, $timeout) {
+
+           
+  
+            $scope.colors = ["#fc0003", "#f70008", "#f2000d", "#ed0012", "#e80017", "#e3001c", "#de0021", "#d90026", "#d4002b", "#cf0030", "#c90036", "#c4003b", "#bf0040", "#ba0045", "#b5004a", "#b0004f", "#ab0054", "#a60059", "#a1005e", "#9c0063", "#960069", "#91006e", "#8c0073", "#870078", "#82007d", "#7d0082", "#780087", "#73008c", "#6e0091", "#690096", "#63009c", "#5e00a1", "#5900a6", "#5400ab", "#4f00b0", "#4a00b5", "#4500ba", "#4000bf", "#3b00c4", "#3600c9", "#3000cf", "#2b00d4", "#2600d9", "#2100de", "#1c00e3", "#1700e8", "#1200ed", "#0d00f2", "#0800f7", "#0300fc"];
+
+            $scope.heads = [
+                {
+                    label: 'brobot-orange-head',
+                    img: './img/heads/brobot-orange-head.png'
+                },
+                {
+                    label: 'owl-purple-head',
+                    img: './img/heads/owl-purple-head.png'
+                },
+                {
+                    label: 'dinosaura-green-head',
+                    img: './img/heads/dinosaura-green-head.png'
+                },
+                {
+                    label: 'ele-original-head',
+                    img: './img/heads/ele-original-head.png'
+                },
+                {
+                    label: 'owl-original-head',
+                    img: './img/heads/owl-original-head.png'
+                },
+                {
+                    label: 'yeti-original-head',
+                    img: './img/heads/yeti-original-head.png'
+                },
+                {
+                    label: 'brobot-orig-head-wink',
+                    img: './img/heads/brobot-orig-head-wink.png'
+                },
+                {
+                    label: 'dinosaura-original-head',
+                    img: './img/heads/dinosaura-original-head.png'
+                },
+                {
+                    label: 'ele-purple-head',
+                    img: './img/heads/ele-purple-head.png'
+                },
+                {
+                    label: 'owl-orange-head',
+                    img: './img/heads/owl-orange-head.png'
+                },
+                {
+                    label: 'brobot-purple-head',
+                    img: './img/heads/brobot-purple-head.png'
+                },
+                {
+                    label: 'yeti-green-head',
+                    img: './img/heads/yeti-green-head.png'
+                },
+                {
+                    label: 'brobot-original-head',
+                    img: './img/heads/brobot-original-head.png'
+                },
+                {
+                    label: 'dinosaura-purple-head',
+                    img: './img/heads/dinosaura-purple-head.png'
+                },
+                {
+                    label: 'ele-orange-head',
+                    img: './img/heads/ele-orange-head.png'
+                },
+
+                {
+                    label: 'owl-green-head',
+                    img: './img/heads/owl-green-head.png'
+                },
+
+                {
+                    label: 'yeti-purple-head',
+                    img: './img/heads/yeti-purple-head.png'
+                },
+                {
+                    label: 'yeti-orange-head',
+                    img: './img/heads/yeti-orange-head.png'
+                }
+            ]
+
+             $scope.torsos = [
+                {
+                    label: 'brobot-orange-torso',
+                    img: './img/torsos/brobot-orange-torso.png'
+                },
+                {
+                    label: 'owl-purple-torso',
+                    img: './img/torsos/owl-purple-torso.png'
+                },
+                {
+                    label: 'dinosaura-green-torso',
+                    img: './img/torsos/dinosaura-green-torso.png'
+                },
+                {
+                    label: 'ele-original-torso',
+                    img: './img/torsos/ele-original-torso.png'
+                },
+                {
+                    label: 'owl-original-torso',
+                    img: './img/torsos/owl-original-torso.png'
+                },
+                {
+                    label: 'yeti-original-torso',
+                    img: './img/torsos/yeti-original-torso.png'
+                },
+                {
+                    label: 'dinosaura-original-torso',
+                    img: './img/torsos/dinosaura-original-torso.png'
+                },
+                {
+                    label: 'ele-purple-torso',
+                    img: './img/torsos/ele-purple-torso.png'
+                },
+                {
+                    label: 'owl-orange-torso',
+                    img: './img/torsos/owl-orange-torso.png'
+                },
+                {
+                    label: 'brobot-purple-torso',
+                    img: './img/torsos/brobot-purple-torso.png'
+                },
+                {
+                    label: 'yeti-green-torso',
+                    img: './img/torsos/yeti-green-torso.png'
+                },
+                {
+                    label: 'brobot-original-torso',
+                    img: './img/torsos/brobot-original-torso.png'
+                },
+                {
+                    label: 'dinosaura-purple-torso',
+                    img: './img/torsos/dinosaura-purple-torso.png'
+                },
+                {
+                    label: 'ele-orange-torso',
+                    img: './img/torsos/ele-orange-torso.png'
+                },
+
+                {
+                    label: 'owl-green-torso',
+                    img: './img/torsos/owl-green-torso.png'
+                },
+
+                {
+                    label: 'yeti-purple-torso',
+                    img: './img/torsos/yeti-purple-torso.png'
+                },
+                {
+                    label: 'yeti-orange-torso',
+                    img: './img/torsos/yeti-orange-torso.png'
+                }
+            ]         
+
+            $scope.legs = [
+                {
+                    label: 'brobot-orange-legs',
+                    img: './img/legs/brobot-orange-legs.png'
+                },
+                {
+                    label: 'owl-purple-legs',
+                    img: './img/legs/owl-purple-legs.png'
+                },
+                {
+                    label: 'dinosaura-green-legs',
+                    img: './img/legs/dinosaura-green-legs.png'
+                },
+                {
+                    label: 'ele-original-legs',
+                    img: './img/legs/ele-original-legs.png'
+                },
+                {
+                    label: 'owl-original-legs',
+                    img: './img/legs/owl-original-legs.png'
+                },
+                {
+                    label: 'yeti-original-legs',
+                    img: './img/legs/yeti-original-legs.png'
+                },
+                {
+                    label: 'dinosaura-original-legs',
+                    img: './img/legs/dinosaura-original-legs.png'
+                },
+                {
+                    label: 'ele-purple-legs',
+                    img: './img/legs/ele-purple-legs.png'
+                },
+                {
+                    label: 'owl-orange-legs',
+                    img: './img/legs/owl-orange-legs.png'
+                },
+                {
+                    label: 'brobot-purple-legs',
+                    img: './img/legs/brobot-purple-legs.png'
+                },
+                {
+                    label: 'yeti-green-legs',
+                    img: './img/legs/yeti-green-legs.png'
+                },
+                {
+                    label: 'brobot-original-legs',
+                    img: './img/legs/brobot-original-legs.png'
+                },
+                {
+                    label: 'dinosaura-purple-legs',
+                    img: './img/legs/dinosaura-purple-legs.png'
+                },
+                {
+                    label: 'ele-orange-legs',
+                    img: './img/legs/ele-orange-legs.png'
+                },
+
+                {
+                    label: 'owl-green-legs',
+                    img: './img/legs/owl-green-legs.png'
+                },
+
+                {
+                    label: 'yeti-purple-legs',
+                    img: './img/legs/yeti-purple-legs.png'
+                },
+                {
+                    label: 'yeti-orange-legs',
+                    img: './img/legs/yeti-orange-legs.png'
+                }
+            ]
+
+            function addSlide(target, style) {
+                var i = target.length;
+                target.push({
+                    label: 'slide #' + (i + 1),
+                    img: 'http://lorempixel.com/450/300/' + style + '/' + (i % 10) ,
+                    color: $scope.colors[ (i*10) % $scope.colors.length],
+                    odd: (i % 2 === 0)
+                });
+            };
+
+            function addSlides(target, style, qty) {
+                for (var i=0; i < qty; i++) {
+                    addSlide(target, style);
+                }
+            }
+            
+            
+        });
+
+        
+    </script>
+</html>
