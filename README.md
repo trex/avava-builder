@@ -1,5 +1,7 @@
 # avava-builder
 
+![avava-builder in action](./demo/avava-builder.gif)
+
 I founded Avava Toys in collaboration with Heidi Hillenbrand, Tony Oberto,
 Danny Tran, Alex Kehr, Alex Mohr, and Martiniano Sanchez in 2014.
 
